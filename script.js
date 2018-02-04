@@ -1,6 +1,10 @@
 
 const myApp = {
 
+    data: {
+        name: [],
+        item: [],
+    },
     buttonAdd: $('.add-item'),
     input: $('.item-input'),
     listContainer: $('.list'),
@@ -29,19 +33,28 @@ const myApp = {
                     </div>
                 </li>
     `;
-            if (self.input.val()) {
-                self.listContainer.prepend(html)}
-            self.input.val('');
+            if (value) {
+                self.listContainer.prepend(html);
+                self.data.item.push(value);
+                self.input.val('');
+                console.log(self.data);
+            }
+
         });
     },
 
     removeItem: function () {
+        const self = this;
+        const arrayItem = self.data.item;
         this.listContainer.on('click', '.remove', function () {
             if ($('.list li').length <= 1) {
                 $(this).closest('ul').empty();
             } else {
                 $(this).closest('li').remove();
             }
+            arrayItem.splice(arrayItem.indexOf(this.innerText));
+                console.log(self.data);
+
         });
     }
 
