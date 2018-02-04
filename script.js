@@ -37,7 +37,11 @@ const myApp = {
 
     removeItem: function () {
         this.listContainer.on('click', '.remove', function () {
-            $(this).closest('li').remove()
+            if ($('.list li').length <= 1) {
+                $(this).closest('ul').empty();
+            } else {
+                $(this).closest('li').remove();
+            }
         });
     }
 
