@@ -126,3 +126,10 @@ header input::-webkit-input-placeholder {
     color: #ff1d33;
     animation: addMove 90ms;
 }
+
+ul.list:empty::after {
+    text-align: center;
+    color: #aaa;
+    content: 'Nic tu nie ma. Nie ma czego plądrować.';
+    display: block;
+}
