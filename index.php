@@ -9,8 +9,13 @@
 <body>
 
 <div class="wrapper flex">
+    <div class="login-wrapper flex">
+        <input class="login-input input" placeholder="imie daj tu" value="">
+        <input class="password-input input" placeholder="hasło" value="">
+        <a href="#" class="submit-login"></a>
+    </div>
     <header class="flex">
-        <input class="item-input" placeholder="zamów tu se bierz" value="">
+        <input class="item-input input" placeholder="zamów tu se bierz" value="">
         <a href="#" class="add-item flex">
             <i class="fas fa-plus fa-sm"></i>
         </a>
@@ -25,3 +30,8 @@
 </body>
 </html>
 
+
+
+<?php
+
+?>
