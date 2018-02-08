@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include_once 'loginsystem.php';
 include_once 'signup.php';
 
@@ -16,17 +17,32 @@ include_once 'signup.php';
 <body>
 <header></header>
 <div class="wrapper flex">
+
+    <?php
+
+        if (isset($_SESSION['u_id'])) {
+            echo '
+        <form action="php/logout.php" method="POST">
+            <button type="submit" name="submit">Nażarł sie już</button>
+        </form>';
+        } else {
+            echo '
         <form class="signup-form" action="php/signup.php" method="POST">
             <input name="username" placeholder="Kto jest głodny?">
             <input name="password" placeholder="Wybierz se hasło">
             <button type="submit" name="submit-signup">Zarejestruj se się</button>
         </form>
 
-        <form class="login-wrapper flex">
+        <form class="login-wrapper flex" action="php/login.php" method="POST">
             <input class="login-input input" name="uid" placeholder="imie dej tu">
             <input class="password-input input" name="pwd" placeholder="hasło dej">
-            <button type="submit" name="" class="submit-login"></button>
-        </form>
+            <button type="submit" name="submit" class="submit-login"></button>
+        </form>';
+        }
+
+    ?>
+
+
 
         <form class=" header flex">
             <input class="item-input input" placeholder="zamów tu se bierz" name="order">
