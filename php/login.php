@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
                     // Log in the user
                     $_SESSION['u_id'] = $row['user_id'];
                     $_SESSION['u_first'] = $row['user_uid'];
-                header("Location: ../index.php?login=success");
+                header("Location: ../logged-in.php");
                 exit();
             }
         }

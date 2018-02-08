@@ -10,42 +10,49 @@ include_once 'signup.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Żryj</title>
+    <title>Title</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
-<body class="flex">
+<body>
 <header></header>
 <div class="wrapper flex">
 
-    <header>
-        <h1 class="title">Zara bejsz jadł</h1>
-    </header>
     <?php
-        if (isset($_SESSION['u_id'])) {
-            $username = $_SESSION['u_first'];
-            echo '
+
+
+    if (isset($_SESSION['u_id'])) {
+        $username = $_SESSION['u_first'];
+        echo '
         <form class="logged-in flex" action="php/logout.php" method="POST">
             <button class="logout-button default-button" type="submit" name="submit">Nażarł sie już '.$username.'</button>
         </form>';
-        } else {
-            echo '
+    } else {
+        echo '
+        <form class="signup-form" action="php/signup.php" method="POST">
+            <input name="username" placeholder="Kto chce żreć?">
+            <input name="password" placeholder="Wybierz se hasło">
+            <button type="submit" name="submit-signup">Zarejestruj se się</button>
+        </form>
+
         <form class="login-wrapper flex" action="php/login.php" method="POST">
             <input class="login-input input" name="uid" placeholder="Nick dej">
             <input class="password-input input" name="pwd" placeholder="Hasło dej">
-            <button type="submit" name="submit" class="default-button">Zaloguj</button>
-        </form>
-        
-        <form class="login-wrapper signup-form flex" action="php/signup.php" method="POST">
-            <input class="login-input input" name="username" placeholder="Dej nick">
-            <input class="login-input input" name="password" placeholder="Dej hasło">
-            <button class="default-button" type="submit" name="submit-signup">Zarejestruj</button>
-        </form>
-        ';
-        }
+            <button type="submit" name="submit" class="submit-login"></button>
+        </form>';
+    }
 
     ?>
 
+
+
+    <form class=" header flex">
+        <input class="item-input input" placeholder="zamów tu se" name="order">
+        <button type="submit" name="" class="add-item flex">
+            <i class="fas fa-plus fa-sm"></i>
+        </button>
+    </form>
+    <ul class="list flex"></ul>
 </div>
 
 
