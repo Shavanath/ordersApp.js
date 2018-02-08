@@ -9,8 +9,11 @@
 /* LOGIN WRAPPER */
 
 .login-wrapper {
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
     padding: 10px;
+}
+
+/* SIGNUP FORM */
+
+.signup-form {
+    visibility: hidden;
 }

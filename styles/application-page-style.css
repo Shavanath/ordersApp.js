@@ -1,16 +1,16 @@
-/* LOGOUT BUTTON STYLE */
+/* LOGOUT FORM STYLE */
 
 .logged-in {
-    padding: 10px;
+    width: 100%;
+    padding: 15px;
     align-items: flex-end;
     justify-content: flex-end;
 }
 
-
-
 /* LIST ADD */
 
 .add-list-item {
+    width: 100%;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -23,22 +23,8 @@
     box-shadow: 0px 2px 4px rgba(44, 62,80,0.15);
 }
 
-.add-list-item input {
-    width: 100%;
-    border-top-right-radius: 90px;
-    border-bottom-right-radius: 90px;
-    height: 60px;
-    background: rgba(238, 238, 238, .3);
-    opacity: .5;
-}
-
-.add-list-item input::-webkit-input-placeholder {
-    outline: none;
-    color: white;
-    font-size: 25px;
-}
-
 .list {
+    width: 100%;
     margin: 70px 30px 0;
     flex-direction: column;
     justify-content: center;

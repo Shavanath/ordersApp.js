@@ -10,7 +10,7 @@ include_once 'signup.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Żryj</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
@@ -25,30 +25,15 @@ include_once 'signup.php';
         $username = $_SESSION['u_first'];
         echo '
         <form class="logged-in flex" action="php/logout.php" method="POST">
-            <button class="logout-button default-button" type="submit" name="submit">Nażarł sie już '.$username.'</button>
-        </form>';
-    } else {
-        echo '
-        <form class="signup-form" action="php/signup.php" method="POST">
-            <input name="username" placeholder="Kto chce żreć?">
-            <input name="password" placeholder="Wybierz se hasło">
-            <button type="submit" name="submit-signup">Zarejestruj se się</button>
-        </form>
-
-        <form class="login-wrapper flex" action="php/login.php" method="POST">
-            <input class="login-input input" name="uid" placeholder="Nick dej">
-            <input class="password-input input" name="pwd" placeholder="Hasło dej">
-            <button type="submit" name="submit" class="submit-login"></button>
+            <button class="logout-button default-button shadow" type="submit" name="submit">Nażarł sie już '.$username.'</button>
         </form>';
     }
-
     ?>
 
 
-
-    <form class=" header flex">
-        <input class="item-input input" placeholder="zamów tu se" name="order">
-        <button type="submit" name="" class="add-item flex">
+    <form class="add-list-item flex" action="" method="POST">
+        <input class="item-input" placeholder="zamów tu se" name="order">
+        <button type="submit" name="" class="add-item-button flex">
             <i class="fas fa-plus fa-sm"></i>
         </button>
     </form>
@@ -56,9 +41,9 @@ include_once 'signup.php';
 </div>
 
 
-<script src="jquery-3.3.1.js"></script>
+<script src="js/jquery-3.3.1.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
 

@@ -14,3 +14,20 @@ input {
     background: rgba(255, 255, 255, .8);
     opacity: .9;
 }
+
+/* APPLICATION PAGE INPUT */
+
+.add-list-item input {
+    width: 100%;
+    border-top-right-radius: 90px;
+    border-bottom-right-radius: 90px;
+    height: 60px;
+    background: rgba(238, 238, 238, .3);
+    opacity: .5;
+}
+
+.add-list-item input::-webkit-input-placeholder {
+    outline: none;
+    color: white;
+    font-size: 25px;
+}
