@@ -20,7 +20,38 @@ body {
     flex-direction: column;
 }
 
-header {
+/*LOGIN WRAPPER*/
+
+.login-wrapper {
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+.input {
+    width: 100px;
+    height: 40px;
+    max-width: 100%;
+    margin: 5px;
+    outline: none;
+    padding: 0 80px 0 0;
+    color: white;
+    font-size: 20px;
+    text-indent: 18px;
+    border: 2px solid white;
+    background: rgba(238, 238, 238, .3);
+    opacity: .5;
+}
+
+.submit-login {
+    border-radius: 25px;
+    margin-left: 5px;
+    width: 42px;
+    height: 42px;
+    background: white;
+}
+
+form.header {
     position: relative;
     justify-content: center;
     align-items: center;
@@ -33,13 +64,7 @@ header {
     box-shadow: 0px 2px 4px rgba(44, 62,80,0.15);
 }
 
-header input {
-    outline: none;
-    padding: 0 80px 0 0;
-    color: white;
-    font-size: 20px;
-    text-indent: 18px;
-    border: 2px solid white;
+form.header .input {
     width: 100%;
     border-top-right-radius: 90px;
     border-bottom-right-radius: 90px;
@@ -48,7 +73,7 @@ header input {
     opacity: .5;
 }
 
-header input::-webkit-input-placeholder {
+form.header input::-webkit-input-placeholder {
     outline: none;
     color: white;
     font-size: 25px;
@@ -63,7 +88,7 @@ header input::-webkit-input-placeholder {
     cursor: pointer;
     position: absolute;
     top: 30px;
-    right: 15px;
+    right: 22px;
     width: 60px;
     height: 60px;
     border-radius: 50px;
@@ -71,10 +96,12 @@ header input::-webkit-input-placeholder {
     color: #4edda5;
 }
 
-.add-item:active {
+.add-item:active, .submit-login:active {
+    outline: none;
     border: none;
     animation: addMove 90ms;
 }
+
 
 @keyframes addMove {
     0% {transform:scale(0);}
@@ -89,12 +116,12 @@ header input::-webkit-input-placeholder {
 }
 
 .item {
+    justify-content: space-between;
     color: #7b7b7b;
     height: 60px;
     margin-bottom: 15px;
     background-color: #f2f5f6;
     border-radius: 3px;
-    justify-content: space-between;
     -webkit-box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);
     -moz-box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);
     box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);

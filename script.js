@@ -2,11 +2,13 @@
 const myApp = {
 
     data: {
-        name: [],
+        name: ["dupa", "chui", "adada", "cycki"],
         item: [],
     },
     buttonAdd: $('.add-item'),
-    input: $('.item-input'),
+    buttonSubmit: $('.submit-login'),
+    inputItem: $('.item-input'),
+    inputLogin: $('.login-input'),
     listContainer: $('.list'),
 
 
@@ -22,7 +24,7 @@ const myApp = {
     addItem: function() {
         const self = this;
         this.buttonAdd.on('click', function () {
-            const value = self.input.val();
+            const value = self.inputItem.val();
             const html = `
                 <li class="item flex">
                     <p class="flex">${value}</p>
@@ -36,16 +38,19 @@ const myApp = {
             if (value) {
                 self.listContainer.prepend(html);
                 self.data.item.push(value);
-                self.input.val('');
-                console.log(self.data);
+                self.inputItem.val('');
             }
 
+        self.dataObjectUpdate();
+            return false;
         });
     },
 
     removeItem: function () {
         const self = this;
         const arrayItem = self.data.item;
+        const arrayName = self.data.name;
+        console.log(self.data);
         this.listContainer.on('click', '.remove', function () {
             if ($('.list li').length <= 1) {
                 $(this).closest('ul').empty();
@@ -53,10 +58,14 @@ const myApp = {
                 $(this).closest('li').remove();
             }
             arrayItem.splice(arrayItem.indexOf(this.innerText));
-                console.log(self.data);
-
+            arrayName.splice(arrayName.indexOf(this.innerText));
+            self.dataObjectUpdate();
         });
-    }
+    },
+
+    dataObjectUpdate: function () {
+        console.log(this.data);
+    },
 
 
 };
