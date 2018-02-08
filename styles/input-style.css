@@ -1,0 +1,16 @@
+/* INPUT GLOBAL STYLES */
+
+input {
+    width: 100px;
+    height: 40px;
+    max-width: 100%;
+    margin: 5px;
+    outline: none;
+    padding: 0 80px 0 0;
+    color: #810010;
+    font-size: 20px;
+    text-indent: 10px;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, .8);
+    opacity: .9;
+}

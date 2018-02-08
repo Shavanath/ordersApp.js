@@ -2,24 +2,59 @@
 const myApp = {
 
     data: {
-        name: ["dupa", "chui", "adada", "cycki"],
-        item: [],
+        item: {
+            name: [],
+            inputValue: []
+        }
     },
-    buttonAdd: $('.add-item'),
-    buttonSubmit: $('.submit-login'),
-    inputItem: $('.item-input'),
+
+    ajaxUrl: 'php/ajax.php',
     inputLogin: $('.login-input'),
+    buttonUsername: $('.submit-login'),
+    inputItem: $('.item-input'),
+    buttonAdd: $('.add-item-button'),
     listContainer: $('.list'),
+    tabClicked: $('.tab-clicked'),
+    tabDisplay: $('.tab-display'),
 
 
     // init
 
     init: function () {
+        this.showContentOnClick();
+        this.addLogin();
         this.addItem();
         this.removeItem();
     },
 
     // functions
+
+    showContentOnClick: function () {
+        const self = this;
+        this.tabClicked.on('click', function () {
+            self.tabDisplay.toggleClass('active')
+        })
+    },
+
+    ajaxPost: function () {
+        const self = this;
+        const username = self.inputLogin;
+        // console.log(username);
+        // $.ajax({
+        //     type:'POST',
+        //     url: self.ajaxUrl,
+        //     data: 'username=',
+        // })
+    },
+
+    addLogin: function () {
+        console.log(this.inputLogin);;
+        const self = this;
+        this.buttonUsername.on('click', function () {
+            const username = self.inputLogin.val();
+            console.log(username);
+        })
+    },
 
     addItem: function() {
         const self = this;
@@ -29,7 +64,7 @@ const myApp = {
                 <li class="item flex">
                     <p class="flex">${value}</p>
                     <div class="buttons flex">
-                        <a href="#" name="remove" class="remove flex">
+                        <a href="#" name="remove" class="remove-button flex">
                             <i class="far fa-trash-alt fa-lg"></i>
                         </a>
                     </div>
@@ -37,7 +72,7 @@ const myApp = {
     `;
             if (value) {
                 self.listContainer.prepend(html);
-                self.data.item.push(value);
+                self.data.item.inputValue.push(value);
                 self.inputItem.val('');
             }
 
@@ -48,10 +83,10 @@ const myApp = {
 
     removeItem: function () {
         const self = this;
-        const arrayItem = self.data.item;
-        const arrayName = self.data.name;
+        const arrayItem = self.data.item.inputValue;
+        const arrayName = self.data.item.name;
         console.log(self.data);
-        this.listContainer.on('click', '.remove', function () {
+        this.listContainer.on('click', '.remove-button', function () {
             if ($('.list li').length <= 1) {
                 $(this).closest('ul').empty();
             } else {

@@ -1,0 +1,86 @@
+/* LOGOUT BUTTON STYLE */
+
+.logged-in {
+    padding: 10px;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+
+
+/* LIST ADD */
+
+.add-list-item {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    height: 90px;
+    z-index: 5;
+    background: #fb9e9a;
+    -webkit-box-shadow: 0px 2px 4px rgba(44, 62,80,0.15);
+    -moz-box-shadow: 0px 2px 4px rgba(44, 62,80,0.15);
+    box-shadow: 0px 2px 4px rgba(44, 62,80,0.15);
+}
+
+.add-list-item input {
+    width: 100%;
+    border-top-right-radius: 90px;
+    border-bottom-right-radius: 90px;
+    height: 60px;
+    background: rgba(238, 238, 238, .3);
+    opacity: .5;
+}
+
+.add-list-item input::-webkit-input-placeholder {
+    outline: none;
+    color: white;
+    font-size: 25px;
+}
+
+.list {
+    margin: 70px 30px 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ADDED ITEM STYLE */
+
+
+.item {
+    justify-content: space-between;
+    color: #7b7b7b;
+    height: 60px;
+    margin-bottom: 15px;
+    background-color: #fbfeff;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);
+    -moz-box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);
+    box-shadow: 0px 1px 2px rgba(44, 62,80,0.15);
+}
+
+.item p {
+    flex-wrap: wrap;
+    align-items: center;
+}
+.item:last-of-type {
+    margin: 0;
+}
+.item * {
+    padding: 10px;
+    margin: 0 20px 0 20px;
+}
+
+/* INFORMATION BELOW ITEM-ADD FORM */
+
+ul.list:empty::after {
+    padding: 10px 20px;
+    opacity: .9;
+    background: white;
+    color: #aaa;
+    content: 'Nic tu nie ma. Nie ma czego plądrować.';
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+}
