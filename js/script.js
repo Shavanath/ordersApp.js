@@ -1,14 +1,17 @@
 
 const myApp = {
 
-    data: {
-        item: {
-            name: [],
-            inputValue: []
-        }
+    data: (localStorage.getItem('testing')) ? JSON.parse(localStorage.getItem('testing')):{
+        id: [],
+        name: [],
+        inputValue: []
     },
 
-    ajaxUrl: 'php/ajax.php',
+    currentUsername: {
+        name: []
+    },
+
+    ajaxUrl: 'php/login.php',
     inputLogin: $('.login-input'),
     buttonUsername: $('.submit-login'),
     inputItem: $('.item-input'),
@@ -21,13 +24,35 @@ const myApp = {
     // init
 
     init: function () {
+        this.dataObjectUpdate();
+        // this.iterate();
+        this.renderList();
         this.showContentOnClick();
-        this.addLogin();
+        this.setUsername();
         this.addItem();
         this.removeItem();
     },
 
     // functions
+
+    renderList: function () {
+        const self = this;
+        console.log(self.data.inputValue);
+        console.log(self.data.name);
+        console.log(self.data.id);
+        console.log(self.data.id);
+        for (let i = 0; i < self.data.inputValue.length; i++) {
+            const value = self.data.inputValue[i];
+            const name = self.data.name[i];
+            console.log(value);
+            console.log(name);
+            self.addItemFromLocalStorage(value, name)
+        }
+    },
+
+    setUsername: function (username) {
+        this.currentUsername.name = [username];
+    },
 
     showContentOnClick: function () {
         const self = this;
@@ -39,30 +64,15 @@ const myApp = {
     ajaxPost: function () {
         const self = this;
         const username = self.inputLogin;
-        // console.log(username);
-        // $.ajax({
-        //     type:'POST',
-        //     url: self.ajaxUrl,
-        //     data: 'username=',
-        // })
     },
 
-    addLogin: function () {
-        console.log(this.inputLogin);;
+    addItemFromLocalStorage: function (value, name, id) {
         const self = this;
-        this.buttonUsername.on('click', function () {
-            const username = self.inputLogin.val();
-            console.log(username);
-        })
-    },
-
-    addItem: function() {
-        const self = this;
-        this.buttonAdd.on('click', function () {
-            const value = self.inputItem.val();
-            const html = `
+        const html = `
                 <li class="item flex">
-                    <p class="flex">${value}</p>
+                    <p class="flex">${id} </p>
+                    <p class="flex">${name} </p>
+                    <p class="flex value-paragraph">${value}</p>
                     <div class="buttons flex">
                         <a href="#" name="remove" class="remove-button flex">
                             <i class="far fa-trash-alt fa-lg"></i>
@@ -70,36 +80,74 @@ const myApp = {
                     </div>
                 </li>
     `;
+        if (value && name && id) {
+            self.listContainer.prepend(html);
+        }
+    },
+
+    addItem: function() {
+        const self = this;
+        let i = 0;
+        this.buttonAdd.on('click', function () {
+            const name = self.currentUsername.name;
+            const value = self.inputItem.val();
+            const html = `
+                <li class="item flex">
+                    <p class="flex">${name} </p>
+                    <p class="flex value-paragraph">${value}</p>
+                    <div class="buttons flex">
+                        <a href="#" name="remove" class="remove-button flex">
+                            <i class="far fa-trash-alt fa-lg"></i>
+                        </a>
+                    </div>
+                </li>
+    `;
+
             if (value) {
+                self.data.id.push(i);
                 self.listContainer.prepend(html);
-                self.data.item.inputValue.push(value);
-                self.inputItem.val('');
+                self.data.inputValue.push(value);
+                self.data.name.push(name[0])
             }
 
+            i++;
         self.dataObjectUpdate();
             return false;
         });
     },
 
+    // iterate: function () {
+    //     const self = this;
+    //     const arrayItem = self.data.inputValue;
+    //     const arrayName = self.data.name;
+    //     for (let i = 0; i < arrayItem.length; i++) {
+    //         console.log(i);
+    //     }
+    // },
+
     removeItem: function () {
         const self = this;
-        const arrayItem = self.data.item.inputValue;
-        const arrayName = self.data.item.name;
-        console.log(self.data);
-        this.listContainer.on('click', '.remove-button', function () {
-            if ($('.list li').length <= 1) {
-                $(this).closest('ul').empty();
-            } else {
-                $(this).closest('li').remove();
-            }
-            arrayItem.splice(arrayItem.indexOf(this.innerText));
-            arrayName.splice(arrayName.indexOf(this.innerText));
-            self.dataObjectUpdate();
-        });
+        const arrayItem = self.data.inputValue;
+        const arrayName = self.data.name;
+        const arrayId = self.data.id;
+            this.listContainer.on('click', '.remove-button', function () {
+                if ($('.list li').length <= 1) {
+                    $(this).closest('ul').empty();
+                } else {
+                    $(this).closest('li').remove();
+                }
+                arrayItem.splice(arrayItem.indexOf(this.innerText));
+                arrayName.splice(arrayName.indexOf(this.innerText));
+                arrayId.splice(arrayId.indexOf(this.innerText));
+                self.dataObjectUpdate();
+            });
     },
 
     dataObjectUpdate: function () {
         console.log(this.data);
+        // localStorage.clear();
+        localStorage.setItem('testing', JSON.stringify(this.data));
+        // console.log(localStorage.getItem('testing'));
     },
 
 
@@ -111,29 +159,4 @@ const myApp = {
 
 
 })(jQuery);
-//
-// const addItem = $('.add-item');
-// const removeItem = $('.remove');
-// const input = $('.item-input');
-// const listContainer = $('.list');
-//
-//
-// addItem.on('click', function () {
-//     if (input.val()) {
-//         listContainer.prepend(`
-//                 <li class="item flex">
-//                     <p class="flex">${input.val()}</p>
-//                     <div class="buttons flex">
-//                         <a href="#" name="remove" class="remove flex">
-//                             <i class="far fa-trash-alt fa-lg"></i>
-//                         </a>
-//                     </div>
-//                 </li>
-//     `)}
-//     input.val('');
-// });
-//
-//     $(document).on('click', function () {
-//         console.log(this);
-//         $(this).closest('li').remove()
-//     });
+

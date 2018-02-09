@@ -44,6 +44,9 @@ include_once 'signup.php';
 <script src="js/jquery-3.3.1.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="js/script.js"></script>
+<script>
+    myApp.setUsername('<?php echo $username ?>');
+</script>
 </body>
 </html>
 

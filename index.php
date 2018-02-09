@@ -22,6 +22,8 @@ include_once 'signup.php';
         <h1 class="title">Zara bejsz jadł</h1>
     </header>
     <?php
+;
+;
         if (isset($_SESSION['u_id'])) {
             $username = $_SESSION['u_first'];
             echo '
@@ -29,6 +31,7 @@ include_once 'signup.php';
             <button class="logout-button default-button shadow" type="submit" name="submit">Nażarł sie już '.$username.'</button>
         </form>';
         } else {
+            $username = $_SESSION['u_first'];
             echo '
         <form class="login-wrapper flex" action="php/login.php" method="POST">
             <input class="login-input" name="uid" placeholder="Nick dej">
