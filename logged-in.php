@@ -23,6 +23,7 @@ include_once 'signup.php';
 
     if (isset($_SESSION['u_id'])) {
         $username = $_SESSION['u_first'];
+        $userId = $_SESSION['u_id'];
         echo '
         <form class="logged-in flex" action="php/logout.php" method="POST">
             <button class="logout-button default-button shadow" type="submit" name="submit">Nażarł sie już '.$username.'</button>
@@ -45,7 +46,8 @@ include_once 'signup.php';
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="js/script.js"></script>
 <script>
-    myApp.setUsername('<?php echo $username ?>');
+    myApp.setUser('<?php echo $username ?>');
+    myApp.setUserId('<?php echo $userId ?>');
 </script>
 </body>
 </html>

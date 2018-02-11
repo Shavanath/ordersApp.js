@@ -22,8 +22,7 @@ include_once 'signup.php';
         <h1 class="title">Zara bejsz jadł</h1>
     </header>
     <?php
-;
-;
+
         if (isset($_SESSION['u_id'])) {
             $username = $_SESSION['u_first'];
             echo '
@@ -47,7 +46,6 @@ include_once 'signup.php';
         </form>
         ';
         }
-
     ?>
 
 </div>

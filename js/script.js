@@ -1,15 +1,16 @@
 
 const myApp = {
 
-    data: (localStorage.getItem('testing')) ? JSON.parse(localStorage.getItem('testing')):{
-        id: [],
-        name: [],
-        inputValue: []
-    },
+    // logged user data
 
-    currentUsername: {
-        name: []
-    },
+    currentUser: {},
+    currentUserId: {},
+
+    // main data container
+
+    data: [],
+
+    // variables
 
     ajaxUrl: 'php/login.php',
     inputLogin: $('.login-input'),
@@ -25,33 +26,21 @@ const myApp = {
 
     init: function () {
         this.dataObjectUpdate();
-        // this.iterate();
-        this.renderList();
+        this.addItemFromLocalStorage();
         this.showContentOnClick();
-        this.setUsername();
         this.addItem();
         this.removeItem();
     },
 
-    // functions
+    // methods
 
-    renderList: function () {
-        const self = this;
-        console.log(self.data.inputValue);
-        console.log(self.data.name);
-        console.log(self.data.id);
-        console.log(self.data.id);
-        for (let i = 0; i < self.data.inputValue.length; i++) {
-            const value = self.data.inputValue[i];
-            const name = self.data.name[i];
-            console.log(value);
-            console.log(name);
-            self.addItemFromLocalStorage(value, name)
-        }
+
+    setUser: function (username) {
+        this.currentUser = username;
     },
 
-    setUsername: function (username) {
-        this.currentUsername.name = [username];
+    setUserId: function (userId) {
+        this.currentUserId = userId;
     },
 
     showContentOnClick: function () {
@@ -66,37 +55,36 @@ const myApp = {
         const username = self.inputLogin;
     },
 
-    addItemFromLocalStorage: function (value, name, id) {
+    addItemFromLocalStorage: function () {
         const self = this;
-        const html = `
+        for(let i = 0; i < localStorage.length; i++){
+            const name = JSON.parse(localStorage.getItem(localStorage.key(i))).userName;
+            const value = JSON.parse(localStorage.getItem(localStorage.key(i))).orderValue;
+            const html = `
                 <li class="item flex">
-                    <p class="flex">${id} </p>
                     <p class="flex">${name} </p>
                     <p class="flex value-paragraph">${value}</p>
                     <div class="buttons flex">
-                        <a href="#" name="remove" class="remove-button flex">
+                        <a href="#" name="remove" data-name="${name}" data-value="${value}" class="remove-button flex">
                             <i class="far fa-trash-alt fa-lg"></i>
                         </a>
                     </div>
                 </li>
     `;
-        if (value && name && id) {
-            self.listContainer.prepend(html);
-        }
-    },
+            self.listContainer.prepend(html)
+        }},
 
     addItem: function() {
         const self = this;
-        let i = 0;
         this.buttonAdd.on('click', function () {
-            const name = self.currentUsername.name;
+            const name = self.currentUser;
             const value = self.inputItem.val();
             const html = `
                 <li class="item flex">
                     <p class="flex">${name} </p>
                     <p class="flex value-paragraph">${value}</p>
                     <div class="buttons flex">
-                        <a href="#" name="remove" class="remove-button flex">
+                        <a href="#" name="remove" data-name="${name}" data-value="${value}" class="remove-button flex">
                             <i class="far fa-trash-alt fa-lg"></i>
                         </a>
                     </div>
@@ -104,50 +92,35 @@ const myApp = {
     `;
 
             if (value) {
-                self.data.id.push(i);
                 self.listContainer.prepend(html);
-                self.data.inputValue.push(value);
-                self.data.name.push(name[0])
+                self.data.push({userId: self.currentUserId, userName: self.currentUser, orderValue: value});
+                self.data.map(function (item) {
+                    localStorage.setItem(`${value}${name}`, JSON.stringify(item));
+                })
             }
-
-            i++;
         self.dataObjectUpdate();
             return false;
         });
     },
 
-    // iterate: function () {
-    //     const self = this;
-    //     const arrayItem = self.data.inputValue;
-    //     const arrayName = self.data.name;
-    //     for (let i = 0; i < arrayItem.length; i++) {
-    //         console.log(i);
-    //     }
-    // },
-
     removeItem: function () {
         const self = this;
-        const arrayItem = self.data.inputValue;
-        const arrayName = self.data.name;
-        const arrayId = self.data.id;
             this.listContainer.on('click', '.remove-button', function () {
+                const keyValue = $(this).data('value');
+                const keyName = $(this).data('name');
                 if ($('.list li').length <= 1) {
                     $(this).closest('ul').empty();
                 } else {
                     $(this).closest('li').remove();
                 }
-                arrayItem.splice(arrayItem.indexOf(this.innerText));
-                arrayName.splice(arrayName.indexOf(this.innerText));
-                arrayId.splice(arrayId.indexOf(this.innerText));
+
+                localStorage.removeItem(`${keyValue}${keyName}`);
                 self.dataObjectUpdate();
             });
     },
 
     dataObjectUpdate: function () {
-        console.log(this.data);
         // localStorage.clear();
-        localStorage.setItem('testing', JSON.stringify(this.data));
-        // console.log(localStorage.getItem('testing'));
     },
 
 
